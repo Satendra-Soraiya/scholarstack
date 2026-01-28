@@ -1,0 +1,8 @@
+com/scholarstack/entity/Role.class
+com/scholarstack/service/UserService.class
+com/scholarstack/entity/User.class
+com/scholarstack/ScholarStackApplication.class
+com/scholarstack/model/User.class
+com/scholarstack/controller/UserController.class
+com/scholarstack/model/Role.class
+com/scholarstack/config/SecurityConfig.class
