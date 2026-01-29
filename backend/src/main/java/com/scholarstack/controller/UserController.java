@@ -1,6 +1,6 @@
 package com.scholarstack.controller;
 
-import com.scholarstack.model.User;
+import com.scholarstack.entity.User;
 import com.scholarstack.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

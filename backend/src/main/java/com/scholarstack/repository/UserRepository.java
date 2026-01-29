@@ -1,2 +1,13 @@
-// Repository temporarily removed - we'll add it back when we set up the database
-// For now, we're using in-memory storage in the Service layer
+package com.scholarstack.repository;
+
+import com.scholarstack.entity.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
+
+@Repository
+public interface UserRepository extends JpaRepository<User, Long> {
+    Optional<User> findByEmail(String email);
+    boolean existsByEmail(String email);
+}

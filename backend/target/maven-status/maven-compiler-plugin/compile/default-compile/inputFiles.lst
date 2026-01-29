@@ -1,9 +1,7 @@
 /Users/montysoraiya/Desktop/DESKTOP FOLDER/scholarstack/backend/src/main/java/com/scholarstack/config/SecurityConfig.java
 /Users/montysoraiya/Desktop/DESKTOP FOLDER/scholarstack/backend/src/main/java/com/scholarstack/entity/Role.java
 /Users/montysoraiya/Desktop/DESKTOP FOLDER/scholarstack/backend/src/main/java/com/scholarstack/controller/UserController.java
-/Users/montysoraiya/Desktop/DESKTOP FOLDER/scholarstack/backend/src/main/java/com/scholarstack/model/Role.java
 /Users/montysoraiya/Desktop/DESKTOP FOLDER/scholarstack/backend/src/main/java/com/scholarstack/service/UserService.java
-/Users/montysoraiya/Desktop/DESKTOP FOLDER/scholarstack/backend/src/main/java/com/scholarstack/model/User.java
 /Users/montysoraiya/Desktop/DESKTOP FOLDER/scholarstack/backend/src/main/java/com/scholarstack/ScholarStackApplication.java
 /Users/montysoraiya/Desktop/DESKTOP FOLDER/scholarstack/backend/src/main/java/com/scholarstack/repository/UserRepository.java
 /Users/montysoraiya/Desktop/DESKTOP FOLDER/scholarstack/backend/src/main/java/com/scholarstack/entity/User.java

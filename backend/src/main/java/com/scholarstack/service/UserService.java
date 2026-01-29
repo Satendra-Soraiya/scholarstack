@@ -1,47 +1,33 @@
 package com.scholarstack.service;
 
-import com.scholarstack.model.User;
-import com.scholarstack.model.Role;
+import com.scholarstack.entity.User;
+import com.scholarstack.entity.Role;
+import com.scholarstack.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
     
-    // In-memory storage for now (we'll replace with database later)
-    private final Map<Long, User> users = new HashMap<>();
-    private final AtomicLong idGenerator = new AtomicLong(1);
-    
-    public UserService() {
-        // Add some sample users for testing
-        User user1 = new User("student1", "student1@university.edu", "password123", Role.STUDENT);
-        user1.setId(idGenerator.getAndIncrement());
-        users.put(user1.getId(), user1);
-        
-        User user2 = new User("faculty1", "faculty1@university.edu", "password123", Role.FACULTY);
-        user2.setId(idGenerator.getAndIncrement());
-        users.put(user2.getId(), user2);
-        
-        User user3 = new User("admin1", "admin1@university.edu", "password123", Role.ADMIN);
-        user3.setId(idGenerator.getAndIncrement());
-        users.put(user3.getId(), user3);
-    }
+    @Autowired
+    private UserRepository userRepository;
     
     // Get all users
     public List<User> getAllUsers() {
-        return new ArrayList<>(users.values());
+        return userRepository.findAll();
     }
     
     // Get user by ID
     public Optional<User> getUserById(Long id) {
-        return Optional.ofNullable(users.get(id));
+        return userRepository.findById(id);
     }
     
     // Get user by username
     public Optional<User> getUserByUsername(String username) {
-        return users.values().stream()
+        return userRepository.findAll().stream()
                 .filter(user -> user.getUsername().equals(username))
                 .findFirst();
     }
@@ -58,19 +44,13 @@ public class UserService {
             throw new RuntimeException("Email already exists");
         }
         
-        // Set ID and add to storage
-        user.setId(idGenerator.getAndIncrement());
-        users.put(user.getId(), user);
-        
-        return user;
+        return userRepository.save(user);
     }
     
     // Update user
     public User updateUser(Long id, User userDetails) {
-        User user = users.get(id);
-        if (user == null) {
-            throw new RuntimeException("User not found");
-        }
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
         
         user.setUsername(userDetails.getUsername());
         user.setEmail(userDetails.getEmail());
@@ -80,25 +60,24 @@ public class UserService {
             user.setPassword(userDetails.getPassword()); // Note: No encoding for now
         }
         
-        return user;
+        return userRepository.save(user);
     }
     
     // Delete user
     public void deleteUser(Long id) {
-        if (!users.containsKey(id)) {
+        if (!userRepository.existsById(id)) {
             throw new RuntimeException("User not found");
         }
-        users.remove(id);
+        userRepository.deleteById(id);
     }
     
     // Check if user exists
     public boolean existsByUsername(String username) {
-        return users.values().stream()
+        return userRepository.findAll().stream()
                 .anyMatch(user -> user.getUsername().equals(username));
     }
     
     public boolean existsByEmail(String email) {
-        return users.values().stream()
-                .anyMatch(user -> user.getEmail().equals(email));
+        return userRepository.existsByEmail(email);
     }
 }
